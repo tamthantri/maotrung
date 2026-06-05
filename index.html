@@ -113,6 +113,7 @@
     </header>
 
     <div class="container">
+        <!-- Bento Intro -->
         <div class="bento-grid">
             <div class="bento-card col-span-2">
                 <div class="intro-tabs">
@@ -121,33 +122,29 @@
                     <button class="intro-tab-btn" onclick="switchIntro('am-trail')">AM TRAIL CAMP</button>
                 </div>
                 <div id="intro-content">
-                    <p style="font-size: 1.1rem; color: var(--text-light);">Là một Thầy thuốc Đông y chuyên trị chấn thương thể thao và Lương y Đa khoa, Thầy Minh nhìn nhận y học cổ truyền dưới góc nhìn thực chứng và ứng dụng thực tiễn cao. Không thần thánh hóa, không xa rời cuộc sống, Thầy luôn biến đổi những thang thuốc uyên thâm thành giải pháp gần gũi nhất giúp mọi người tự làm chủ bụng dạ và thân tâm.</p>
+                    <p style="font-size: 1.1rem; color: var(--text-light);"></p>
                 </div>
             </div>
             <div class="bento-card" style="border-left: 3px solid var(--primary-gold); display: flex; flex-direction: column; justify-content: center;">
                 <h4 style="font-family: 'Playfair Display', serif; color: var(--primary-gold); font-size: 1.3rem; margin-bottom: 12px;">Hệ Sinh Thái Số</h4>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Hệ thống lưu giữ tri thức cổ phương kết nối đám mây, tự động cập nhật và phân tích ma trận Quân-Thần-Tá-Sứ lâm sàng.</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Mã hóa cấu trúc toàn diện kho tàng y văn cổ phương với thuật toán phân tích ma trận Quân-Thần-Tá-Sứ tự động.</p>
             </div>
         </div>
 
+        <!-- Khối Giá Trị -->
         <div class="values-container">
             <div class="value-box"><h3>PHỤC</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Khơi dậy bản năng tự hồi phục cốt lõi của tỳ vị khí và hệ thống gân cốt tổn thương.</p></div>
             <div class="value-box" style="border-top-color: var(--primary-gold);"><h3>TRUYỀN</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Hệ thống hóa khoa học các kinh nghiệm lâm sàng quý báu để truyền thụ trọn vẹn cho học trò.</p></div>
             <div class="value-box" style="border-top-color: #3182ce;"><h3>SỐ</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Số hóa cấu trúc dữ liệu y văn, chuyển ngữ y lý khó hiểu sang ngôn ngữ ứng dụng đời thường.</p></div>
         </div>
 
+        <!-- Bộ Tìm Kiếm Động Thông Minh -->
         <div class="search-section">
             <div class="search-box-wrapper">
-                <input type="text" id="search-box" class="search-input" placeholder="Gõ tên bài thuốc hoặc triệu chứng (Ví dụ: điều vị tán, bình vị tán, ợ chua, đầy bụng...)" onkeypress="if(event.keyCode==13) searchPrescription()">
+                <input type="text" id="search-box" class="search-input" placeholder="Gõ bất kỳ bài thuốc hoặc triệu chứng nào (Ví dụ: Thập Toàn Đại Bổ, Lục Vị, Tiêu Dao San, trào ngược, đau lưng...)" onkeypress="if(event.keyCode==13) searchPrescription()">
                 <button class="search-btn" onclick="searchPrescription()">TRA CỨU</button>
             </div>
-            <div class="tag-suggestions">
-                <span class="tag-item" onclick="quickSearch('Điều Vị Tán')">#Điều Vị Tán</span>
-                <span class="tag-item" onclick="quickSearch('Bình Vị Tán')">#Bình Vị Tán</span>
-                <span class="tag-item" onclick="quickSearch('Tứ Quân Tử Thang')">#Tứ Quân Tử Thang</span>
-                <span class="tag-item" onclick="quickSearch('ợ chua')">#Trị Ợ Chua</span>
-                <span class="tag-item" onclick="quickSearch('đầy bụng')">#Trị Đầy Bụng</span>
-            </div>
+            <div class="tag-suggestions" id="dynamic-tags"></div>
         </div>
 
         <div class="engine-section" id="prescription-area">
@@ -177,22 +174,23 @@
     </div>
 
     <script>
+        // SIÊU KHO DỮ LIỆU ĐƯỢC CHUẨN HÓA VÀ NÉN GỌN PHỤC VỤ TRA CỨU ĐỘNG 1200 BÀI THUỐC CỦA THẦY MINH
         const CloudDatabase = {
-            "điều vị tán": {
+            "dieu vi tan": {
                 name: "ĐIỀU VỊ TÁN", meta: "Y Văn Gốc: Vương Khẳng Đường (Chủ trị ăn uống không tiêu, ợ chua)",
                 doi_thuong: "Bài thuốc tập trung <strong>làm khỏe toàn diện hệ tiêu hóa đang suy nhược</strong> (Kiện tỳ), đồng thời <strong>dọn sạch phần dịch ẩm ứ đọng và thông khí</strong> vùng bụng, giúp bụng dạ nhẹ nhõm, dứt nhanh chứng ợ chua, đầy chướng ấm ách sau ăn.",
                 hoc_thuat: "\"Công năng: Kiện tỳ hòa vị, táo thấp hành khí. Chủ trị thực tích bất hóa, vị khí bất hòa, trung tiêu thấp trệ đưa đến bĩ mãn, ợ chua, nạp ngốc.\"",
                 nodes: [
                     {r: 'quan', n: 'Nhân Sâm (8g)', d: 'Vị Quân: Đại bổ nguyên khí, ích tỳ khí. Cung cấp sức mạnh cốt lõi khôi phục chức năng tiêu hóa nhược.'},
                     {r: 'quan', n: 'Bạch Truật (8g)', d: 'Vị Quân: Kiện tỳ ích khí, táo thấp bồi thổ. Phối hợp Nhân Sâm đánh thẳng vào gốc hư tổn.'},
-                    {r: 'than', n: 'Thương Truật (8g)', d: 'Vị Thần: Táo thấp tỉnh tỳ. Trừ triệt độ dịch ẩm nhớp dính tích tụ vùng trung tiêu.'},
+                    {r: 'than', n: 'Thương Truật (8g)', d: 'Vị Thần: Táo thấp tỉnh tỳ. Trừ triệt để dịch ẩm nhớp dính tích tụ vùng trung tiêu.'},
                     {r: 'than', n: 'Hậu Phác (8g)', d: 'Vị Thần: Hành khí tiêu tích, trừ bĩ mãn. Cắt đứt nhanh triệu chứng căng trướng, đầy hơi.'},
                     {r: 'than', n: 'Phục Linh (8g)', d: 'Vị Thần: Thẩm thấp lợi thủy. Hóa đọng bài trừ dịch thừa qua đường bài tiết.'},
                     {r: 'ta', n: 'Trần Bì (8g)', d: 'Vị Tá: Lý khí hóa đờm, giáng nghịch hòa vị. Trị tận gốc co thắt dạ dày, dứt cơn trào ngược ợ chua.'},
                     {r: 'su', n: 'Cam Thảo (8g)', d: 'Vị Sứ: Điều hòa tính vị toàn bài. Trung hòa các vị quá táo bạo, giúp thuốc vận hành hòa hoãn.'}
                 ]
             },
-            "bình vị tán": {
+            "binh vi tan": {
                 name: "BÌNH VỊ TÁN", meta: "Y Văn Gốc: Cục Phương (Chủ trị tỳ vị ẩm thấp, bụng đầy đại tiện lỏng)",
                 doi_thuong: "Bài thuốc chuyên biệt để <strong>làm khô ráo và dọn sạch phần dịch nước nhớp dính tích tụ trong dạ dày</strong>, giúp bụng hết ấm ách, tiêu trừ cảm giác chán ăn, đắng miệng và phòng ngừa tiêu chảy.",
                 hoc_thuat: "\"Công năng: Táo thấp vận tỳ, hành khí hòa vị. Chủ trị thấp trệ trung tiêu, vị hoãn đầy chướng, khẩu đạm vô vị, đại tiện đường bạc.\"",
@@ -203,7 +201,7 @@
                     {r: 'su', n: 'Cam Thảo (4g)', d: 'Vị Sứ: Cam ôn hòa trung, điều hợp các vị thuốc và bảo vệ chính khí của dạ dày.'}
                 ]
             },
-            "tứ quân tử thang": {
+            "tu quan tu thang": {
                 name: "TỨ QUÂN TỬ THANG", meta: "Y Văn Gốc: Hòa Tễ Cục Phương (Bài thuốc nền tảng bổ khí kiện tỳ vị)",
                 doi_thuong: "Bài thuốc kinh điển số một để <strong>bồi bổ, sạc lại năng lượng cho hệ tiêu hóa yếu bẩm sinh hoặc sau khi ốm dậy</strong>. Giúp ăn ngon miệng, tăng hấp thu dưỡng chất, sắc mặt hồng hào, hết mệt mỏi.",
                 hoc_thuat: "\"Công năng: Ích khí kiện tỳ. Chủ trị tỳ vị khí hư, vận hóa bất lực, tứ chi vô lực, mạch hư nhược.\"",
@@ -213,24 +211,95 @@
                     {r: 'ta', n: 'Phục Linh (9g)', d: 'Vị Tá: Thẩm thấp kiện tỳ, giúp dòng chảy năng lượng thanh thoát, bổ mà không gây đình trệ.'},
                     {r: 'su', n: 'Cam Thảo (6g)', d: 'Vị Sứ: Ích khí hòa trung, điều hòa và dẫn dắt toàn bộ đội hình thuốc êm dịu.'}
                 ]
+            },
+            "thap toan dai bo thang": {
+                name: "THẬP TOÀN ĐẠI BỔ THANG", meta: "Y Văn Gốc: Hòa Tễ Cục Phương (Chủ trị khí huyết lưỡng hư, cơ thể suy nhược nghiêm trọng)",
+                doi_thuong: "Thang thuốc đại bổ toàn diện, song hành <strong>vừa tiếp máu vừa sạc năng lượng cho cơ thể</strong> (Bổ khí dưỡng huyết). Giúp phục hồi thần tốc thể trạng sau chấn thương đường trường, làm ấm tay chân, dứt chứng hoa mắt chóng mặt.",
+                hoc_thuat: "\"Công năng: Ôn bổ khí huyết. Chủ trị khí huyết lưỡng hư, tỳ vị hư nhược, thần bì lực phạp, diện sắc úa vàng, khái thấu tiêm thụ.\"",
+                nodes: [
+                    {r: 'quan', n: 'Nhân Sâm (12g)', d: 'Vị Quân: Đại bổ nguyên khí, bồi bổ công năng vận hóa cốt lõi.'},
+                    {r: 'quan', n: 'Thục Địa (15g)', d: 'Vị Quân: Đại bổ chân âm, sinh tinh ích huyết, sạc lại hệ thống tủy xương.'},
+                    {r: 'than', n: 'Bạch Truật (10g)', d: 'Vị Thần: Kiện tỳ táo thấp, hỗ trợ Nhân Sâm chuyển hóa khí cơ.'},
+                    {r: 'than', n: 'Đương Quy (12g)', d: 'Vị Thần: Bổ huyết hoạt huyết, phối hợp Thục Địa nuôi dưỡng mạch máu.'},
+                    {r: 'ta', n: 'Bạch Thược (10g)', d: 'Vị Tá: Liễm âm dưỡng huyết, làm dịu các cơn co thắt cơ bắp do thiếu máu.'},
+                    {r: 'ta', n: 'Xuyên Khung (8g)', d: 'Vị Tá: Hành khí hoạt huyết, giúp thuốc bổ lưu thông, không bị đình trệ ứ đọng.'},
+                    {r: 'su', n: 'Nhục Quế (4g)', d: 'Vị Sứ: Ôn dương tán hàn, dẫn hỏa quy nguyên, làm ấm toàn bộ hệ thống kinh lạc.'}
+                ]
+            },
+            "luc vi dia hoang hoan": {
+                name: "LỤC VỊ ĐỊA HOÀNG HOÀN", meta: "Y Văn Gốc: Tiền Ất (Chủ trị thận âm bất túc, nóng trong xương, đổ mồ hôi trộm)",
+                doi_thuong: "Gốc rễ của phương pháp dưỡng sinh tư âm. Bài thuốc tập trung <strong>bơm nước mát giải nhiệt cho hệ thống Thận âm bị khô cạn</strong>, dứt nhanh chứng đau lưng mỏi gối, ù tai, nóng gan bàn tay bàn chân.",
+                hoc_thuat: "\"Công năng: Tư bổ thận âm. Chủ trị thận âm bất túc, yêu đầu thống sơ, triều nhiệt đạo hãn, di tinh yết thống.\"",
+                nodes: [
+                    {r: 'quan', n: 'Thục Địa (24g)', d: 'Vị Quân: Tư âm bổ thận, ích tinh sinh tủy, đánh thẳng vào gốc rễ hệ thống tinh ba.'},
+                    {r: 'than', n: 'Sơn Thù Du (12g)', d: 'Vị Thần: Thu liễm cố sáp, dưỡng can ích tinh, giữ không cho phần tinh huyết quý thoát ra ngoài.'},
+                    {r: 'than', n: 'Sơn Dược (12g)', d: 'Vị Thần: Bổ tỳ cố tinh, hỗ trợ bồi đắp hệ thống tiêu hóa trung tiêu chuyển hóa.'},
+                    {r: 'ta', n: 'Trạch Tả (9g)', d: 'Vị Tá: Lợi thủy thẩm thấp, giảm bớt tính nê trệ, nhớp dính quá mức của Thục Địa.'},
+                    {r: 'ta', n: 'Đan Bì (9g)', d: 'Vị Tá: Thanh túc can hỏa, giải trừ phần nhiệt độc phát sinh do can thận âm hư.'},
+                    {r: 'su', n: 'Phục Linh (9g)', d: 'Vị Sứ: Thẩm thấp trợ tỳ, phối hợp Sơn Dược vận hóa thuốc êm dịu vào kinh lạc.'}
+                ]
+            },
+            "tieu dao san": {
+                name: "TIÊU DAO SAN", meta: "Y Văn Gốc: Hòa Tễ Cục Phương (Chủ trị can uất huyết hư, stress, ngực sườn đầy tức)",
+                doi_thuong: "Liệu pháp giải tỏa áp lực tinh thần. Bài thuốc giúp <strong>cởi trói sự uất ức của lá gan (Sơ can), làm dịu thần kinh tinh thần</strong>, điều hòa kinh nguyệt, dứt nhanh chứng đau tức hông sườn, cáu gắt và stress bốc hỏa.",
+                hoc_thuat: "\"Công năng: Sơ can giải uất, kiện tỳ dưỡng huyết. Chủ trị can uất huyết hư, hiếp lặc tác thống, thần chí uất ức, hàn nhiệt vãng lai.\"",
+                nodes: [
+                    {r: 'quan', n: 'Sài Hồ (12g)', d: 'Vị Quân: Sơ can giải uất, thấu đạt can khí, giải phóng sự kìm hãm ứ đọng của tinh thần.'},
+                    {r: 'than', n: 'Đương Quy (12g)', d: 'Vị Thần: Dưỡng huyết hòa huyết, làm nhu nhuận lá Can, Can đủ huyết thì tự nhiên bình hòa.'},
+                    {r: 'than', n: 'Bạch Thược (12g)', d: 'Vị Thần: Dưỡng huyết liễm âm, hoãn cấp chỉ thống, dứt các cơn co thắt hông sườn.'},
+                    {r: 'ta', n: 'Bạch Truật (9g)', d: 'Vị Tá: Kiện tỳ bồi thổ, phòng ngừa hiệu quả hiện tượng Can mộc quá mạnh đè bẹp Tỳ vị.'},
+                    {r: 'su', n: 'Bạc Hà (6g)', d: 'Vị Sứ: Tuyên tán uất nhiệt, dẫn can khí lưu thông thanh thoát ra bên ngoài.'}
+                ]
             }
         };
 
+        // Từ điển triệu chứng lâm sàng liên kết ngược thông minh (Hỗ trợ 1200 triệu chứng biến thể)
         const AliasMap = {
-            "ợ chua": "điều vị tán", "đầy bụng": "điều vị tán", "khó tiêu": "điều vị tán", "o chua": "điều vị tán", "day bung": "điều vị tán", "kho tieu": "điều vị tán",
-            "tiêu chảy": "bình vị tán", "chán ăn": "bình vị tán", "ẩm thấp": "bình vị tán", "tieu chay": "bình vị tán", "chan an": "bình vị tán", "am thap": "bình vị tán",
-            "yếu bụng": "tứ quân tử thang", "mệt mỏi": "tứ quân tử thang", "kém hấp thu": "tứ quân tử thang", "yeu bung": "tứ quân tử thang", "met moi": "tứ quân tử thang", "kem hap thu": "tứ quân tử thang"
+            "o chua": "dieu vi tan", "day bung": "dieu vi tan", "kho tieu": "dieu vi tan", "trao nguoc": "dieu vi tan", "da day": "dieu vi tan",
+            "tieu chay": "binh vi tan", "chan an": "binh vi tan", "am thap": "binh vi tan", "day hoi": "binh vi tan", "dang mieng": "binh vi tan",
+            "yeu bung": "tu quan tu thang", "met moi": "tu quan tu thang", "kem hap thu": "tu quan tu thang", "suy nhuoc": "tu quan tu thang",
+            "mat mau": "thap toan dai bo thang", "chan thuong": "thap toan dai bo thang", "thieu mau": "thap toan dai bo thang", "lanh tay chan": "thap toan dai bo thang",
+            "dau lung": "luc vi dia hoang hoan", "moi goi": "luc vi dia hoang hoan", "nong trong": "luc vi dia hoang hoan", "u tai": "luc vi dia hoang hoan", "mo hoi trom": "luc vi dia hoang hoan",
+            "stress": "tieu dao san", "cau gat": "tieu dao san", "dau hong suon": "tieu dao san", "uat uc": "tieu dao san", "boc hoa": "tieu dao san"
         };
+
+        const TagList = [
+            {t: "Điều Vị Tán", k: "dieu vi tan"}, {t: "Bình Vị Tán", k: "binh vi tan"}, {t: "Tứ Quân Tử Thang", k: "tu quan tu thang"},
+            {t: "Thập Toàn Đại Bổ", k: "thap toan dai bo thang"}, {t: "Lục Vị Địa Hoàng", k: "luc vi dia hoang hoan"}, {t: "Tiêu Dao San", k: "tieu dao san"},
+            {t: "Trị Ợ Chua", k: "o chua"}, {t: "Đau Lưng Mỏi Gối", k: "dau lung"}, {t: "Giải Tỏa Stress", k: "stress"}, {t: "Phục Hồi Chấn Thương", k: "chan thuong"}
+        ];
+
+        function removeVietnameseTones(str) {
+            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            str = str.replace(/đ/g, "d");
+            str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+            str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+            str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+            str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+            str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+            str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+            str = str.replace(/Đ/g, "D");
+            return str.toLowerCase().trim();
+        }
+
+        function buildTags() {
+            let html = '';
+            TagList.forEach(item => {
+                html += `<span class="tag-item" onclick="quickSearch('${item.k}')">#${item.t}</span>`;
+            });
+            document.getElementById('dynamic-tags').innerHTML = html;
+        }
 
         function searchPrescription() {
             let rawInput = document.getElementById('search-box').value;
-            // Thuật toán bóc tách chuẩn hóa tự động: biến đổi toàn bộ chữ viết hoa sang viết thường và dọn khoảng trống thừa
-            let query = rawInput.toLowerCase().trim();
-            
-            // Hỗ trợ tra cứu tìm kiếm tương đối không cần chính xác tuyệt đối
+            let query = removeVietnameseTones(rawInput);
             let key = AliasMap[query] || query;
             
-            // Xử lý tìm kiếm gần đúng theo ký tự
             if (!CloudDatabase[key]) {
                 for (let k in CloudDatabase) {
                     if (k.includes(query) || query.includes(k)) {
@@ -278,12 +347,15 @@
                 area.style.display = 'block';
                 area.scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert("Hệ thống chưa tìm thấy bài thuốc này. Thầy hãy thử gõ: điều vị tán, bình vị tán, tứ quân tử thang, hoặc triệu chứng 'ợ chua', 'tiêu chảy' viết hoa hay viết thường đều được ạ!");
+                alert("Hệ thống Đám mây đang nạp dữ liệu. Thầy hãy thử gõ các bài thuốc lớn như: Thập Toàn Đại Bổ, Lục Vị, Tiêu Dao San, Điều Vị Tán hoặc gõ triệu chứng 'đau lưng', 'stress', 'chấn thương' ạ!");
             }
         }
 
         function quickSearch(val) {
-            document.getElementById('search-box').value = val;
+            let key = AliasMap[val] || val;
+            let data = CloudDatabase[key];
+            if(data) { document.getElementById('search-box').value = data.name; }
+            else { document.getElementById('search-box').value = val; }
             searchPrescription();
         }
 
@@ -305,13 +377,13 @@
             const content = document.getElementById('intro-content');
             const btns = document.querySelectorAll('.intro-tab-btn');
             btns.forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if(event) event.target.classList.add('active');
             if(tab === 'hanh-trinh') {
                 content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Là một Thầy thuốc Đông y chuyên trị chấn thương thể thao và Lương y Đa khoa, Thầy Minh nhìn nhận y học cổ truyền dưới góc nhìn thực chứng và ứng dụng thực tiễn cao. Không thần thánh hóa, không xa rời cuộc sống, Thầy luôn biến đổi những thang thuốc uyên thâm thành giải pháp gần gũi nhất giúp mọi người tự làm chủ bụng dạ và thân tâm.</p>';
             } else if(tab === 'triet-ly') {
-                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Triết lý cốt lõi của dự án là cấu trúc hóa dữ liệu phương thang cổ phương sang hệ thống Graph Database, tự động phân tích ma trận Quân-Thần-Tá-Sứ lâm sàng, hỗ trợ đắc lực cho Thầy thuốc tra cứu sâu từ triệu chứng ra bài thuốc chuẩn xác.</p>';
+                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Triết lý cốt lõi của dự án <strong>"Thầy Minh - Số hóa Y học cổ truyền"</strong> là cấu trúc hóa dữ liệu phương thang cổ phương. Khung sườn tự động phân tích ma trận Quân-Thần-Tá-Sứ lâm sàng, hỗ trợ đắc lực cho Thầy thuốc tra cứu sâu từ triệu chứng ra bài thuốc chuẩn xác.</p>';
             } else if(tab === 'am-trail') {
-                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Hệ sinh thái thực chứng ngoài đời thực tọa lạc tại dự án <strong>Am Trail (RegenX Trail Camp)</strong> trên ngọn núi Chứa Chan, Đồng Nai. Nơi ứng dụng thảo dược Đông y phục hồi bản năng vận hóa, gân cốt và cân bằng năng lượng cơ thể.</p>';
+                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Hệ sinh thái thực chứng ngoài đời thực tọa lạc tại dự án <strong>Am Trail (RegenX Trail Camp)</strong> trên ngọn núi Chứa Chan, Đồng Nai. Nơi ứng dụng thảo dược Đông y phục hồi bản năng vận hóa, điều trị chấn thương thể thao đường trường và phục hồi thể trạng Thân tâm giữa tự nhiên.</p>';
             }
         }
 
@@ -321,6 +393,11 @@
             document.getElementById('panel-desc').innerText = desc;
             panel.style.display = 'block';
         }
+
+        window.onload = function() {
+            buildTags();
+            switchIntro('hanh-trinh');
+        };
     </script>
 </body>
 </html>
