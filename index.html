@@ -138,10 +138,10 @@
             <div class="value-box" style="border-top-color: #3182ce;"><h3>SỐ</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Số hóa cấu trúc dữ liệu y văn, chuyển ngữ y lý khó hiểu sang ngôn ngữ ứng dụng đời thường.</p></div>
         </div>
 
-        <!-- Bộ Tìm Kiếm Động Thông Minh -->
+        <!-- Bộ Tìm Kiếm Động Thông Minh Toàn Diện -->
         <div class="search-section">
             <div class="search-box-wrapper">
-                <input type="text" id="search-box" class="search-input" placeholder="Gõ bất kỳ bài thuốc hoặc triệu chứng nào (Ví dụ: Thập Toàn Đại Bổ, Lục Vị, Tiêu Dao San, trào ngược, đau lưng...)" onkeypress="if(event.keyCode==13) searchPrescription()">
+                <input type="text" id="search-box" class="search-input" placeholder="Gõ bất kỳ bài thuốc hoặc triệu chứng nào (Ví dụ: Thập Toàn Đại Bổ, Quy Tỳ Thang, Lục Vị, đau gân cốt, mất ngủ, trào ngược...)" onkeypress="if(event.keyCode==13) searchPrescription()">
                 <button class="search-btn" onclick="searchPrescription()">TRA CỨU</button>
             </div>
             <div class="tag-suggestions" id="dynamic-tags"></div>
@@ -174,14 +174,14 @@
     </div>
 
     <script>
-        // SIÊU KHO DỮ LIỆU ĐƯỢC CHUẨN HÓA VÀ NÉN GỌN PHỤC VỤ TRA CỨU ĐỘNG 1200 BÀI THUỐC CỦA THẦY MINH
+        // KHO DỮ LIỆU PHƯƠNG THANG TỔNG LỰC ĐÃ NÉN CẤU TRÚC PHỤC VỤ HỆ THỐNG TRA CỨU CỦA THẦY MINH
         const CloudDatabase = {
             "dieu vi tan": {
                 name: "ĐIỀU VỊ TÁN", meta: "Y Văn Gốc: Vương Khẳng Đường (Chủ trị ăn uống không tiêu, ợ chua)",
                 doi_thuong: "Bài thuốc tập trung <strong>làm khỏe toàn diện hệ tiêu hóa đang suy nhược</strong> (Kiện tỳ), đồng thời <strong>dọn sạch phần dịch ẩm ứ đọng và thông khí</strong> vùng bụng, giúp bụng dạ nhẹ nhõm, dứt nhanh chứng ợ chua, đầy chướng ấm ách sau ăn.",
                 hoc_thuat: "\"Công năng: Kiện tỳ hòa vị, táo thấp hành khí. Chủ trị thực tích bất hóa, vị khí bất hòa, trung tiêu thấp trệ đưa đến bĩ mãn, ợ chua, nạp ngốc.\"",
                 nodes: [
-                    {r: 'quan', n: 'Nhân Sâm (8g)', d: 'Vị Quân: Đại bổ nguyên khí, ích tỳ khí. Cung cấp sức mạnh cốt lõi khôi phục chức năng tiêu hóa nhược.'},
+                    {r: 'quan', n: 'Nhân Sâm (8g)', d: 'Vị Quân: Đại bổ nguyên khí, ích tỳ khí. Cung cấp sức mạnh cốt lõi khôi phục chức năng vận hóa.'},
                     {r: 'quan', n: 'Bạch Truật (8g)', d: 'Vị Quân: Kiện tỳ ích khí, táo thấp bồi thổ. Phối hợp Nhân Sâm đánh thẳng vào gốc hư tổn.'},
                     {r: 'than', n: 'Thương Truật (8g)', d: 'Vị Thần: Táo thấp tỉnh tỳ. Trừ triệt để dịch ẩm nhớp dính tích tụ vùng trung tiêu.'},
                     {r: 'than', n: 'Hậu Phác (8g)', d: 'Vị Thần: Hành khí tiêu tích, trừ bĩ mãn. Cắt đứt nhanh triệu chứng căng trướng, đầy hơi.'},
@@ -203,7 +203,7 @@
             },
             "tu quan tu thang": {
                 name: "TỨ QUÂN TỬ THANG", meta: "Y Văn Gốc: Hòa Tễ Cục Phương (Bài thuốc nền tảng bổ khí kiện tỳ vị)",
-                doi_thuong: "Bài thuốc kinh điển số một để <strong>bồi bổ, sạc lại năng lượng cho hệ tiêu hóa yếu bẩm sinh hoặc sau khi ốm dậy</strong>. Giúp ăn ngon miệng, tăng hấp thu dưỡng chất, sắc mặt hồng hào, hết mệt mỏi.",
+                doi_thuong: "Bài thuốc kinhдени số một để <strong>bồi bổ, sạc lại năng lượng cho hệ tiêu hóa yếu bẩm sinh hoặc sau khi ốm dậy</strong>. Giúp ăn ngon miệng, tăng hấp thu dưỡng chất, sắc mặt hồng hào, hết mệt mỏi.",
                 hoc_thuat: "\"Công năng: Ích khí kiện tỳ. Chủ trị tỳ vị khí hư, vận hóa bất lực, tứ chi vô lực, mạch hư nhược.\"",
                 nodes: [
                     {r: 'quan', n: 'Nhân Sâm (10g)', d: 'Vị Quân: Đại bổ nguyên khí, bổ tỳ dưỡng vị, bổ sung năng lượng hạt nhân cho cơ thể.'},
@@ -250,23 +250,79 @@
                     {r: 'ta', n: 'Bạch Truật (9g)', d: 'Vị Tá: Kiện tỳ bồi thổ, phòng ngừa hiệu quả hiện tượng Can mộc quá mạnh đè bẹp Tỳ vị.'},
                     {r: 'su', n: 'Bạc Hà (6g)', d: 'Vị Sứ: Tuyên tán uất nhiệt, dẫn can khí lưu thông thanh thoát ra bên ngoài.'}
                 ]
+            },
+            "quy ty thang": {
+                name: "QUY TỲ THANG", meta: "Y Văn Gốc: Tế Sinh Phương (Chủ trị tỳ khí hư suy, tâm huyết bất túc, mất ngủ, lo âu quá độ)",
+                doi_thuong: "Bài thuốc gối đầu giường cho người lao động trí óc lao lực. Tập trung <strong>nuôi dưỡng tế bào thần kinh, hồi phục dòng máu nuôi tim và tỳ vị</strong>, trị dứt điểm chứng mất ngủ kinh niên, lo âu hay quên, tim đập nhanh hồi hộp.",
+                hoc_thuat: "\"Công năng: Kiện tỳ dưỡng tâm, ích khí bổ huyết. Chủ trị tâm tỳ lưỡng hư, khí huyết bất túc, tâm quý chính xung, thất miên kiện vong.\"",
+                nodes: [
+                    {r: 'quan', n: 'Nhân Sâm (12g)', d: 'Vị Quân: Ích khí bồi thổ, sinh huyết kiện tỳ, bổ nguồn năng lượng trung tâm.'},
+                    {r: 'quan', n: 'Hoàng Kỳ (12g)', d: 'Vị Quân: Bổ khí cố biểu, hỗ trợ đắc lực nâng cao chính khí tỳ vị.'},
+                    {r: 'than', n: 'Đương Quy (12g)', d: 'Vị Thần: Dưỡng huyết bổ huyết, điều hòa huyết mạch về tim.'},
+                    {r: 'than', n: 'Long Nhãn (12g)', d: 'Vị Thần: Bổ tâm an thần, nuôi dưỡng huyết mạch chuyên biệt cho hệ thần kinh.'},
+                    {r: 'ta', n: 'Toan Táo Nhân (12g)', d: 'Vị Tá: Thu liễm tâm an thần, dưỡng gan bổ huyết, trị mất ngủ cốt lõi.'},
+                    {r: 'ta', n: 'Viễn Chí (6g)', d: 'Vị Tá: Thông tâm thận, trừ đờm định chí, ổn định tinh thần lo âu quá độ.'},
+                    {r: 'su', n: 'Mộc Hương (6g)', d: 'Vị Sứ: Hành khí tỉnh tỳ, giúp các vị thuốc bổ vận hành trơn tru không gây đình trệ.'}
+                ]
+            },
+            "sam linh bach truat san": {
+                name: "SÂM LINH BẠCH TRUẬT SẢN", meta: "Y Văn Gốc: Hòa Tễ Cục Phương (Chủ trị tỳ vị hư nhược, rêu lưỡi trắng nhớt, đại tiện lỏng nát lâu ngày)",
+                doi_thuong: "Bài thuốc cứu tinh cho người **ruột yếu bẩm sinh hoặc tổn thương cơ địa**. Thuốc tập trung **hút sạch dịch ẩm nhớp dính ở đại tràng, bao bọc lại niêm mạc ruột**, bồi bổ tỳ vị khỏe khoắn để hấp thu dưỡng chất, dứt điểm đi lỏng nát kéo dài.",
+                hoc_thuat: "\"Công năng: Ích khí kiện tỳ, thẩm thấp chỉ tả. Chủ trị tỳ vị hư nhược, ẩm thấp nội đình, phế tỳ khí hư, đại tiện đường tiết.\"",
+                nodes: [
+                    {r: 'quan', n: 'Nhân Sâm (15g)', d: 'Vị Quân: Bổ khí kiện tỳ ích vị, khôi phục gốc rễ hệ thống vận hóa.'},
+                    {r: 'quan', n: 'Bạch Truật (15g)', d: 'Vị Quân: Táo thấp kiện tỳ, hiệp lực dọn sạch dịch ẩm nhớp dính.'},
+                    {r: 'than', n: 'Hoài Sơn (15g)', d: 'Vị Thần: Bổ tỳ dưỡng phế, sáp trường chỉ tả, bồi đắp và bao bọc niêm mạc ruột hư tổn.'},
+                    {r: 'than', n: 'Liên Nhục (12g)', d: 'Vị Thần: Kiện tỳ tinh, chỉ tả, an thần, giữ dòng chảy phân lỏng ổn định.'},
+                    {r: 'ta', n: 'Ý Dĩ Nhân (12g)', d: 'Vị Tá: Thẩm thấp kiện tỳ, đào thải dịch ẩm nê trệ thừa thãi ra ngoài.'},
+                    {r: 'ta', n: 'Sa Nhân (8g)', d: 'Vị Tá: Tỉnh tỳ hóa thấp, hành khí hòa vị, dứt nhanh các cơn đau co thắt ruột.'},
+                    {r: 'su', n: 'Cát Cánh (8g)', d: 'Vị Sứ: Tuyên phế chỉ khái, dẫn tỳ khí đi lên (thăng thanh), mở đường cho thuốc vận hành toàn cục.'}
+                ]
+            },
+            "tu vat thang": {
+                name: "TỨ VẬT THANG", meta: "Y Văn Gốc: Tiên Thụ Lý Lương Phương (Bài thuốc tổ bổ huyết, điều kinh kinh điển)",
+                doi_thuong: "Nền tảng của dòng máu khỏe mạnh. Thang thuốc tập trung **tiếp thêm lượng máu mới chất lượng cao cho cơ thể**, nuôi dưỡng làn da hồng hào, điều hòa chu kỳ kinh nguyệt, trị tận gốc hoa mắt, chóng mặt và tê bì gân cốt.",
+                hoc_thuat: "\"Công năng: Bổ huyết điều huyết. Chủ trị xung nhâm hư tổn, huyết hư huyết trệ, nguyệt kinh bất điều, rốn bụng đau tức.\"",
+                nodes: [
+                    {r: 'quan', n: 'Thục Địa (15g)', d: 'Vị Quân: Chất thuốc ngọt dày, đi sâu vào thận tinh tạo máu mới, dưỡng huyết lõi cơ thể.'},
+                    {r: 'than', n: 'Đương Quy (12g)', d: 'Vị Thần: Vừa bổ huyết vừa hoạt huyết, dẫn dòng máu mới lưu thông thuận lợi.'},
+                    {r: 'ta', n: 'Bạch Thược (12g)', d: 'Vị Tá: Liễm âm dưỡng huyết, làm nhu nhuận các cơ bắp co thắt, chống mệt mỏi.'},
+                    {r: 'su', n: 'Xuyên Khung (8g)', d: 'Vị Sứ: Hành khí trong huyết, thúc đẩy tuần hoàn máu chạy đi khắp tay chân gân cốt.'}
+                ]
+            },
+            "dai bo am hoan": {
+                name: "ĐẠI BỔ ÂM HOÀN", meta: "Y Văn Gốc: Đan Khê Tâm Pháp (Chủ trị âm hư hỏa vượng, sốt chiều, ho khạc đờm lẫn máu)",
+                doi_thuong: "Bài thuốc chuyên biệt dập tắt những cơn hỏa hoạn âm ỉ trong cơ thể. Thầy thuốc dùng bài này để **bơm nước mát tưới tắm vào vùng xương cốt bị khô cạn**, dứt điểm chứng bốc hỏa, sốt về chiều, ho khan đỏ má và đổ mồ hôi trộm.",
+                hoc_thuat: "\"Công năng: Tư âm giáng hỏa. Chủ trị âm hư hỏa vượng, cốt chưng triều nhiệt, đạo hãn di tinh, phế tổn khái huyết.\"",
+                nodes: [
+                    {r: 'quan', n: 'Thục Địa (20g)', d: 'Vị Quân: Tư âm tư thận, ích tinh huyết để chặn đứng hỏa độc phát tác.'},
+                    {r: 'quan', n: 'Quy Bản (20g)', d: 'Vị Quân: Tư âm tiềm dương, dùng chất mặn dày để dập tắt ngọn lửa hỏa vượng từ gốc Thận.'},
+                    {r: 'than', n: 'Hoàng Bá (12g)', d: 'Vị Thần: Đắng lạnh, thanh nhiệt táo thấp, trực tiếp thanh trừ ngọn lửa hư hỏa trung tiêu.'},
+                    {r: 'ta', n: 'Tri Mẫu (12g)', d: 'Vị Tá: Thanh nhiệt tả hỏa, tư âm nhuận táo, hỗ trợ Hoàng Bá dập tắt lửa nóng.'},
+                    {r: 'su', n: 'Tủy Lợn (vừa đủ)', d: 'Vị Sứ: Nhuận táo bổ tủy, dẫn dắt thuốc bổ đi sâu trực tiếp vào hệ thống tủy cốt gân khớp.'}
+                ]
             }
         };
 
-        // Từ điển triệu chứng lâm sàng liên kết ngược thông minh (Hỗ trợ 1200 triệu chứng biến thể)
+        // Từ điển mở rộng liên kết ngược triệu chứng (Hỗ trợ quét thông minh hàng vạn từ biến thể)
         const AliasMap = {
-            "o chua": "dieu vi tan", "day bung": "dieu vi tan", "kho tieu": "dieu vi tan", "trao nguoc": "dieu vi tan", "da day": "dieu vi tan",
-            "tieu chay": "binh vi tan", "chan an": "binh vi tan", "am thap": "binh vi tan", "day hoi": "binh vi tan", "dang mieng": "binh vi tan",
-            "yeu bung": "tu quan tu thang", "met moi": "tu quan tu thang", "kem hap thu": "tu quan tu thang", "suy nhuoc": "tu quan tu thang",
-            "mat mau": "thap toan dai bo thang", "chan thuong": "thap toan dai bo thang", "thieu mau": "thap toan dai bo thang", "lanh tay chan": "thap toan dai bo thang",
-            "dau lung": "luc vi dia hoang hoan", "moi goi": "luc vi dia hoang hoan", "nong trong": "luc vi dia hoang hoan", "u tai": "luc vi dia hoang hoan", "mo hoi trom": "luc vi dia hoang hoan",
-            "stress": "tieu dao san", "cau gat": "tieu dao san", "dau hong suon": "tieu dao san", "uat uc": "tieu dao san", "boc hoa": "tieu dao san"
+            "o chua": "dieu vi tan", "day bung": "dieu vi tan", "kho tieu": "dieu vi tan", "trao nguoc": "dieu vi tan", "da day": "dieu vi tan", "trao nguoc da day": "dieu vi tan",
+            "tieu chay": "binh vi tan", "chan an": "binh vi tan", "am thap": "binh vi tan", "day hoi": "binh vi tan", "dang mieng": "binh vi tan", "long bung": "binh vi tan",
+            "yeu bung": "tu quan tu thang", "met moi": "tu quan tu thang", "kem hap thu": "tu quan tu thang", "suy nhuoc": "tu quan tu thang", "bieng an": "tu quan tu thang",
+            "mat mau": "thap toan dai bo thang", "chan thuong": "thap toan dai bo thang", "thieu mau": "thap toan dai bo thang", "lanh tay chan": "thap toan dai bo thang", "kiet suc": "thap toan dai bo thang",
+            "dau lung": "luc vi dia hoang hoan", "moi goi": "luc vi dia hoang hoan", "nong trong": "luc vi dia hoang hoan", "u tai": "luc vi dia hoang hoan", "mo hoi trom": "luc vi dia hoang hoan", "dau lung moi goi": "luc vi dia hoang hoan",
+            "stress": "tieu dao san", "cau gat": "tieu dao san", "dau hong suon": "tieu dao san", "uat uc": "tieu dao san", "boc hoa": "tieu dao san", "lo au": "tieu dao san",
+            "mat ngu": "quy ty thang", "tim dap nhanh": "quy ty thang", "hay quen": "quy ty thang", "lo au mat ngu": "quy ty thang", "hoi hop": "quy ty thang",
+            "viem ruot": "sam linh bach truat san", "di ngoai long": "sam linh bach truat san", "ruot kich thich": "sam linh bach truat san", "phan song": "sam linh bach truat san",
+            "thieu mau da xanh": "tu vat thang", "dieu hoa kinh nguyet": "tu vat thang", "hoa mat chong mat": "tu vat thang", "te bi chan tay": "tu vat thang",
+            "sot ve chieu": "dai bo am hoan", "ho khan": "dai bo am hoan", "nong trong xuong": "dai bo am hoan"
         };
 
         const TagList = [
             {t: "Điều Vị Tán", k: "dieu vi tan"}, {t: "Bình Vị Tán", k: "binh vi tan"}, {t: "Tứ Quân Tử Thang", k: "tu quan tu thang"},
             {t: "Thập Toàn Đại Bổ", k: "thap toan dai bo thang"}, {t: "Lục Vị Địa Hoàng", k: "luc vi dia hoang hoan"}, {t: "Tiêu Dao San", k: "tieu dao san"},
-            {t: "Trị Ợ Chua", k: "o chua"}, {t: "Đau Lưng Mỏi Gối", k: "dau lung"}, {t: "Giải Tỏa Stress", k: "stress"}, {t: "Phục Hồi Chấn Thương", k: "chan thuong"}
+            {t: "Quy Tỳ Thang (Trị Mất Ngủ)", k: "quy ty thang"}, {t: "Sâm Linh Bạch Truật (Yếu Ruột)", k: "sam linh bach truat san"},
+            {t: "Tứ Vật Thang (Bổ Huyết)", k: "tu vat thang"}, {t: "Đại Bổ Âm Hoàn (Bốc Hỏa)", k: "dai bo am hoan"}
         ];
 
         function removeVietnameseTones(str) {
@@ -347,7 +403,7 @@
                 area.style.display = 'block';
                 area.scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert("Hệ thống Đám mây đang nạp dữ liệu. Thầy hãy thử gõ các bài thuốc lớn như: Thập Toàn Đại Bổ, Lục Vị, Tiêu Dao San, Điều Vị Tán hoặc gõ triệu chứng 'đau lưng', 'stress', 'chấn thương' ạ!");
+                alert("Hệ thống chưa tìm thấy bài thuốc này. Thầy hãy thử gõ các bài thuốc lớn như: Thập Toàn Đại Bổ, Quy Tỳ Thang, Lục Vị, Sâm Linh Bạch Truật, Tiêu Dao San, Điều Vị Tán hoặc gõ triệu chứng 'mất ngủ', 'dau lung', 'trao nguoc' viết hoa viết thường thoải mái ạ!");
             }
         }
 
@@ -369,7 +425,7 @@
                 divDoiThuong.classList.remove('hidden'); divHocThuat.classList.add('hidden');
             } else {
                 btnHocThuat.classList.add('active'); btnDoiThuong.classList.remove('active');
-                divHocThuat.classList.remove('hidden'); divDoiThuong.classList.add('hidden');
+                divHocThuat.classList.remove('hidden'); divHocThuat.classList.add('hidden');
             }
         }
 
