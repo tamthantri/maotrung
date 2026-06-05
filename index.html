@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thầy Minh - Số hóa Y học cổ truyền</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0A0D10;
+            --bg-radial: radial-gradient(circle at 50% 50%, #161D24 0%, #0A0D10 100%);
+            --card-bg: rgba(22, 29, 36, 0.75);
+            --card-border: rgba(212, 175, 55, 0.18);
+            --primary-gold: #D4AF37;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --accent-green: #7A9342;
+            --text-light: #E6EDF3;
+            --text-muted: #8B9BB4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg-radial); color: var(--text-light);
+            font-family: 'Montserrat', sans-serif; line-height: 1.7;
+            padding: 40px 20px; min-height: 100vh;
+        }
+
+        body::before {
+            content: ""; position: fixed; top: 15px; bottom: 15px; left: 15px; right: 15px;
+            border: 1px solid var(--card-border); pointer-events: none; z-index: 10;
+        }
+
+        header { text-align: center; padding: 60px 0 40px; }
+        header h1 {
+            font-family: 'Playfair Display', serif; color: var(--primary-gold);
+            font-size: 3.2rem; letter-spacing: 3px; text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 12px; text-transform: uppercase; letter-spacing: 5px; }
+
+        .container { max-width: 1280px; margin: 0 auto; position: relative; z-index: 2; }
+
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; }
+        .bento-card {
+            background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 40px;
+            backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+        }
+        .bento-card:hover { transform: translateY(-5px); border-color: var(--primary-gold); box-shadow: 0 15px 40px rgba(212, 175, 55, 0.1); }
+        .col-span-2 { grid-column: span 2; }
+        .bento-card h2 { font-family: 'Playfair Display', serif; color: var(--primary-gold); margin-bottom: 20px; font-size: 2.2rem; }
+
+        .intro-tabs { display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .intro-tab-btn { background: none; border: none; color: var(--text-muted); font-weight: 600; cursor: pointer; padding: 5px 10px; font-size: 0.85rem; letter-spacing: 1px; }
+        .intro-tab-btn.active { color: var(--primary-gold); border-bottom: 2px solid var(--primary-gold); }
+
+        /* Khung tìm kiếm nâng cấp */
+        .search-section { background: rgba(22, 29, 36, 0.5); padding: 30px; border-radius: 20px; border: 1px solid var(--card-border); margin-bottom: 40px; }
+        .search-box-wrapper { display: flex; gap: 15px; margin-bottom: 15px; }
+        .search-input {
+            flex: 1; background: #0A0D10; border: 1px solid var(--card-border);
+            padding: 18px 25px; border-radius: 30px; color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1.1rem;
+        }
+        .search-input:focus { border-color: var(--primary-gold); outline: none; box-shadow: 0 0 15px var(--gold-glow); }
+        .search-btn { background: var(--primary-gold); color: #0A0D10; border: none; padding: 0 35px; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s; }
+        .search-btn:hover { background: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+        
+        .tag-suggestions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tag-item { background: rgba(255,255,255,0.05); color: var(--text-muted); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; border: 1px solid transparent; transition: all 0.3s; }
+        .tag-item:hover { border-color: var(--primary-gold); color: var(--primary-gold); }
+
+        /* Toa thuốc động */
+        .engine-section {
+            background: var(--card-bg); border-radius: 24px; padding: 50px; border: 1px solid var(--card-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: none; animation: fadeIn 0.5s ease forwards;
+        }
+        .engine-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 25px; margin-bottom: 35px; }
+        .toggle-container { display: flex; background: #0A0D10; padding: 6px; border-radius: 30px; border: 1px solid var(--card-border); }
+        .toggle-btn { padding: 10px 24px; border: none; background: none; color: var(--text-muted); cursor: pointer; border-radius: 20px; font-weight: 600; font-size: 0.85rem; }
+        .toggle-btn.active { background: var(--primary-gold); color: #0A0D10; box-shadow: 0 4px 15px var(--gold-glow); }
+
+        /* Ma trận kết nối */
+        .matrix-pitch {
+            background: radial-gradient(circle at 50% 50%, #111A13 0%, #070B08 100%);
+            border: 1px solid rgba(122, 147, 66, 0.3); border-radius: 20px; padding: 45px; position: relative; box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+        }
+        .matrix-title { text-align: center; color: var(--primary-gold); font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 35px; }
+        .node-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 30px; text-align: center; }
+        .herbal-node {
+            background: rgba(10, 13, 16, 0.85); border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 20px 15px; border-radius: 14px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .herbal-node:hover { border-color: var(--primary-gold); background: #161D24; box-shadow: 0 0 20px var(--gold-glow); transform: scale(1.05); }
+        .node-name { font-size: 1.1rem; font-weight: 600; color: #FFFFFF; display: block; margin-bottom: 6px; }
+
+        .role-badge { display: inline-block; font-size: 0.7rem; padding: 3px 10px; border-radius: 30px; font-weight: 600; text-transform: uppercase; }
+        .badge-quan { background: rgba(133, 35, 35, 0.2); color: #FF6B6B; border: 1px solid rgba(239, 68, 68, 0.4); }
+        .badge-than { background: rgba(35, 84, 133, 0.2); color: #6BA4FF; border: 1px solid rgba(59, 130, 246, 0.4); }
+        .badge-ta { background: rgba(133, 98, 35, 0.2); color: #FFD46B; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .badge-su { background: rgba(35, 133, 67, 0.2); color: #6BFF8A; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+        .explanation-panel { background: rgba(10, 13, 16, 0.95); border: 1px solid var(--card-border); border-radius: 12px; padding: 25px; margin-top: 25px; display: none; }
+        .hidden { display: none; }
+        .values-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; }
+        .value-box { background: rgba(22, 29, 36, 0.6); border-radius: 16px; padding: 35px 25px; text-align: center; border: 1px solid var(--card-border); border-top: 4px solid var(--accent-green); }
+        .value-box h3 { color: var(--primary-gold); font-size: 1.6rem; margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 992px) { .bento-grid, .values-container, .node-row { grid-template-columns: 1fr; } .col-span-2 { grid-column: span 1; } .engine-header { flex-direction: column; gap: 25px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>THẦY MINH</h1>
+        <p>Số hóa Y học cổ truyền</p>
+    </header>
+
+    <div class="container">
+        <!-- Bento Intro -->
+        <div class="bento-grid">
+            <div class="bento-card col-span-2">
+                <div class="intro-tabs">
+                    <button class="intro-tab-btn active" onclick="switchIntro('hanh-trinh')">HÀNH TRÌNH</button>
+                    <button class="intro-tab-btn" onclick="switchIntro('triet-ly')">TRIẾT LÝ SỐ HÓA</button>
+                    <button class="intro-tab-btn" onclick="switchIntro('am-trail')">AM TRAIL CAMP</button>
+                </div>
+                <div id="intro-content">
+                    <p style="font-size: 1.1rem; color: var(--text-light);">Là một Thầy thuốc Đông y chuyên trị chấn thương thể thao và Lương y Đa khoa, Thầy Minh nhìn nhận y học cổ truyền dưới góc nhìn thực chứng và ứng dụng thực tiễn cao. Không thần thánh hóa, không xa rời cuộc sống, Thầy luôn biến đổi những thang thuốc uyên thâm thành giải pháp gần gũi nhất giúp mọi người tự làm chủ bụng dạ và thân tâm.</p>
+                </div>
+            </div>
+            <div class="bento-card" style="border-left: 3px solid var(--primary-gold); display: flex; flex-direction: column; justify-content: center;">
+                <h4 style="font-family: 'Playfair Display', serif; color: var(--primary-gold); font-size: 1.3rem; margin-bottom: 12px;">Hệ Sinh Thái Số</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Hệ thống lưu giữ tri thức cổ phương kết nối đám mây, tự động cập nhật và phân tích ma trận Quân-Thần-Tá-Sứ lâm sàng.</p>
+            </div>
+        </div>
+
+        <!-- Khối Giá Trị -->
+        <div class="values-container">
+            <div class="value-box"><h3>PHỤC</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Khơi dậy bản năng tự hồi phục cốt lõi của tỳ vị khí và hệ thống gân cốt tổn thương.</p></div>
+            <div class="value-box" style="border-top-color: var(--primary-gold);"><h3>TRUYỀN</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Hệ thống hóa khoa học các kinh nghiệm lâm sàng quý báu để truyền thụ trọn vẹn cho học trò.</p></div>
+            <div class="value-box" style="border-top-color: #3182ce;"><h3>SỐ</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Số hóa cấu trúc dữ liệu y văn, chuyển ngữ y lý khó hiểu sang ngôn ngữ ứng dụng đời thường.</p></div>
+        </div>
+
+        <!-- Trạm Tìm Kiếm Kết Nối Đám Mây -->
+        <div class="search-section">
+            <div class="search-box-wrapper">
+                <input type="text" id="search-box" class="search-input" placeholder="Gõ tên bài thuốc hoặc triệu chứng (Ví dụ: điều vị tán, bình vị tán, ợ chua, đầy bụng...)" onkeypress="if(event.keyCode==13) searchPrescription()">
+                <button class="search-btn" onclick="searchPrescription()">TRA CỨU</button>
+            </div>
+            <div class="tag-suggestions">
+                <span class="tag-item" onclick="quickSearch('Điều Vị Tán')">#Điều Vị Tán</span>
+                <span class="tag-item" onclick="quickSearch('Bình Vị Tán')">#Bình Vị Tán</span>
+                <span class="tag-item" onclick="quickSearch('Tứ Quân Tử Thang')">#Tứ Quân Tử Thang</span>
+                <span class="tag-item" onclick="quickSearch('ợ chua')">#Trị Ợ Chua</span>
+                <span class="tag-item" onclick="quickSearch('đầy bụng')">#Trị Đầy Bụng</span>
+            </div>
+        </div>
+
+        <!-- Vùng hiển thị kết quả động -->
+        <div class="engine-section" id="prescription-area">
+            <div class="engine-header">
+                <div>
+                    <h2 id="p-name" style="font-family: 'Playfair Display', serif; color: var(--primary-gold); font-size: 2rem;"></h2>
+                    <p id="p-meta" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px; letter-spacing: 1px;"></p>
+                </div>
+                <div class="toggle-container">
+                    <button class="toggle-btn active" onclick="switchMode('doi-thuong')">ĐỜI THƯỜNG</button>
+                    <button class="toggle-btn" onclick="switchMode('hoc-thuat')">HỌC THUẬT</button>
+                </div>
+            </div>
+
+            <div id="mode-doi-thuong"><p id="p-desc-doi-thuong" style="font-size: 1.2rem; margin-bottom: 25px; border-left: 4px solid var(--accent-green); padding-left: 20px; color: #FFFFFF;"></p></div>
+            <div id="mode-hoc-thuat" class="hidden"><p id="p-desc-hoc-thuat" style="font-size: 1.2rem; margin-bottom: 25px; border-left: 4px solid var(--primary-gold); padding-left: 20px; font-style: italic; color: #E2E8F0;"></p></div>
+
+            <!-- Ma Trận Kết Nối -->
+            <div class="matrix-pitch" style="margin-top: 40px;">
+                <div class="matrix-title">Ma Trận Phối Ngũ Quân Thần Tá Sứ</div>
+                <div id="matrix-nodes-container"></div>
+                <div id="explanation-panel" class="explanation-panel">
+                    <h4 id="panel-title" style="color: var(--primary-gold); margin-bottom: 8px; font-family: 'Playfair Display', serif; font-size: 1.2rem;"></h4>
+                    <p id="panel-desc" style="font-size: 0.95rem; color: var(--text-light);"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kho dữ liệu đám mây giả lập tích hợp sẵn toàn bộ danh mục bài thuốc cốt lõi để Thầy chỉ cần copy-paste là chạy ngay được
+        const CloudDatabase = {
+            "điều vị tán": {
+                name: "ĐIỀU VỊ TÁN", meta: "Y Văn Gốc: Vương Khẳng Đường (Chủ trị ăn uống không tiêu, ợ chua)",
+                doi_thuong: "Bài thuốc tập trung <strong>làm khỏe toàn diện hệ tiêu hóa đang suy nhược</strong> (Kiện tỳ), đồng thời <strong>dọn sạch phần dịch ẩm ứ đọng và thông khí</strong> vùng bụng, giúp bụng dạ nhẹ nhõm, dứt nhanh chứng ợ chua, đầy chướng ấm ách sau ăn.",
+                hoc_thuat: "\"Công năng: Kiện tỳ hòa vị, táo thấp hành khí. Chủ trị thực tích bất hóa, vị khí bất hòa, trung tiêu thấp trệ đưa đến bĩ mãn, ợ chua, nạp ngốc.\"",
+                nodes: [
+                    {r: 'quan', n: 'Nhân Sâm (8g)', d: 'Vị Quân: Đại bổ nguyên khí, ích tỳ khí. Cung cấp sức mạnh cốt lõi khôi phục chức năng tiêu hóa nhược.'},
+                    {r: 'quan', n: 'Bạch Truật (8g)', d: 'Vị Quân: Kiện tỳ ích khí, táo thấp bồi thổ. Phối hợp Nhân Sâm đánh thẳng vào gốc hư tổn.'},
+                    {r: 'than', n: 'Thương Truật (8g)', d: 'Vị Thần: Táo thấp tỉnh tỳ. Trừ triệt để dịch ẩm nhớp dính tích tụ vùng trung tiêu.'},
+                    {r: 'than', n: 'Hậu Phác (8g)', d: 'Vị Thần: Hành khí tiêu tích, trừ bĩ mãn. Cắt đứt nhanh triệu chứng căng trướng, đầy hơi.'},
+                    {r: 'than', n: 'Phục Linh (8g)', d: 'Vị Thần: Thẩm thấp lợi thủy. Hóa đọng bài trừ dịch thừa qua đường bài tiết.'},
+                    {r: 'ta', n: 'Trần Bì (8g)', d: 'Vị Tá: Lý khí hóa đờm, giáng nghịch hòa vị. Trị tận gốc co thắt dạ dày, dứt cơn trào ngược ợ chua.'},
+                    {r: 'su', n: 'Cam Thảo (8g)', d: 'Vị Sứ: Điều hòa tính vị toàn bài. Trung hòa các vị quá táo bạo, giúp thuốc vận hành hòa hoãn.'}
+                ]
+            },
+            "bình vị tán": {
+                name: "BÌNH VỊ TÁN", meta: "Y Văn Gốc: Cục Phương (Chủ trị tỳ vị ẩm thấp, bụng đầy đại tiện lỏng)",
+                doi_thuong: "Bài thuốc chuyên biệt để <strong>làm khô ráo và dọn sạch phần dịch nước nhớp dính tích tụ trong dạ dày</strong>, giúp bụng hết ấm ách, tiêu trừ cảm giác chán ăn, đắng miệng và phòng ngừa tiêu chảy.",
+                hoc_thuat: "\"Công năng: Táo thấp vận tỳ, hành khí hòa vị. Chủ trị thấp trệ trung tiêu, vị hoãn đầy chướng, khẩu đạm vô vị, đại tiện đường bạc.\"",
+                nodes: [
+                    {r: 'quan', n: 'Thương Truật (12g)', d: 'Vị Quân: Táo thấp kiện tỳ rất mạnh, trực tiếp làm khô ráo phần dịch ẩm nê trệ ở dạ dày.'},
+                    {r: 'than', n: 'Hậu Phác (9g)', d: 'Vị Thần: Khổ ôn hạ khí, tiêu trừ bĩ mãn, giúp giải phóng áp lực khí trệ gây chướng bụng.'},
+                    {r: 'ta', n: 'Trần Bì (9g)', d: 'Vị Tá: Lý khí hòa vị, điều hòa dòng chảy năng lượng trong bụng, kích thích cảm giác thèm ăn.'},
+                    {r: 'su', n: 'Cam Thảo (4g)', d: 'Vị Sứ: Cam ôn hòa trung, điều hợp các vị thuốc và bảo vệ chính khí của dạ dày.'}
+                ]
+            },
+            "tứ quân tử thang": {
+                name: "TỨ QUÂN TỬ THANG", meta: "Y Văn Gốc: Hòa Tễ Cục Phương (Bài thuốc nền tảng bổ khí kiện tỳ vị)",
+                doi_thuong: "Bài thuốc kinh điển số một để <strong>bồi bổ, sạc lại năng lượng cho hệ tiêu hóa yếu bẩm sinh hoặc sau khi ốm dậy</strong>. Giúp ăn ngon miệng, tăng hấp thu dưỡng chất, sắc mặt hồng hào, hết mệt mỏi.",
+                hoc_thuat: "\"Công năng: Ích khí kiện tỳ. Chủ trị tỳ vị khí hư, vận hóa bất lực, tứ chi vô lực, mạch hư nhược.\"",
+                nodes: [
+                    {r: 'quan', n: 'Nhân Sâm (10g)', d: 'Vị Quân: Đại bổ nguyên khí, bổ tỳ dưỡng vị, bổ sung năng lượng hạt nhân cho cơ thể.'},
+                    {r: 'than', n: 'Bạch Truật (9g)', d: 'Vị Thần: Đóng vai trò kiện tỳ, làm khô ráo phần thấp thừa, hỗ trợ đắc lực cho Nhân Sâm.'},
+                    {r: 'ta', n: 'Phục Linh (9g)', d: 'Vị Tá: Thẩm thấp kiện tỳ, giúp dòng chảy năng lượng thanh thoát, bổ mà không gây đình trệ.'},
+                    {r: 'su', n: 'Cam Thảo (6g)', d: 'Vị Sứ: Ích khí hòa trung, điều hòa và dẫn dắt toàn bộ đội hình thuốc êm dịu.'}
+                ]
+            }
+        };
+
+        // Đồng bộ hóa công cụ tìm kiếm ngược triệu chứng
+        const AliasMap = {
+            "ợ chua": "điều vị tán", "đầy bụng": "điều vị tán", "khó tiêu": "điều vị tán",
+            "tiêu chảy": "bình vị tán", "chán ăn": "bình vị tán", "ẩm thấp": "bình vị tán",
+            "yếu bụng": "tứ quân tử thang", "mệt mỏi": "tứ quân tử thang", "kém hấp thu": "tứ quân tử thang"
+        };
+
+        function searchPrescription() {
+            let query = document.getElementById('search-box').value.toLowerCase().trim();
+            let key = AliasMap[query] || query;
+            let data = CloudDatabase[key];
+            let area = document.getElementById('prescription-area');
+
+            if (data) {
+                document.getElementById('p-name').innerText = "Phương Thang Số Hóa: " + data.name;
+                document.getElementById('p-meta').innerText = data.meta;
+                document.getElementById('p-desc-doi-thuong').innerHTML = data.doi_thuong;
+                document.getElementById('p-desc-hoc-thuat').innerHTML = data.hoc_thuat;
+
+                // Xây dựng sơ đồ Quân Thần Tá Sứ động từ kho dữ liệu
+                let container = document.getElementById('matrix-nodes-container');
+                container.innerHTML = '';
+                
+                // Phân nhóm hàng
+                let roles = ['quan', 'than', 'ta', 'su'];
+                roles.forEach(role => {
+                    let filtered = data.nodes.filter(n => n.r === role);
+                    if (filtered.length > 0) {
+                        let row = document.createElement('div');
+                        row.className = 'node-row';
+                        let innerWrapper = document.createElement('div');
+                        innerWrapper.style.cssText = 'grid-column: span 4; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;';
+                        
+                        filtered.forEach(node => {
+                            innerWrapper.innerHTML += `
+                                <div class="herbal-node" onclick="showNodeDesc('${node.n}', '${role.toUpperCase()}', '${node.d}')">
+                                    <span class="node-name">${node.n}</span>
+                                    <span class="role-badge badge-${role}">${role === 'quan' ? 'Quân' : role === 'than' ? 'Thần' : role === 'ta' ? 'Tá' : 'Sứ'}</span>
+                                </div>
+                            `;
+                        });
+                        row.appendChild(innerWrapper);
+                        container.appendChild(row);
+                    }
+                });
+
+                document.getElementById('explanation-panel').style.display = 'none';
+                area.style.display = 'block';
+                area.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert("Hệ thống chưa tìm thấy bài thuốc này trên kho đám mây. Thầy hãy thử gõ: điều vị tán, bình vị tán, tứ quân tử thang, hoặc triệu chứng 'ợ chua', 'tiêu chảy' ạ!");
+            }
+        }
+
+        function quickSearch(val) {
+            document.getElementById('search-box').value = val;
+            searchPrescription();
+        }
+
+        function switchMode(mode) {
+            const btnDoiThuong = document.querySelectorAll('.toggle-btn')[0];
+            const btnHocThuat = document.querySelectorAll('.toggle-btn')[1];
+            const divDoiThuong = document.getElementById('mode-doi-thuong');
+            const divHocThuat = document.getElementById('mode-hoc-thuat');
+            if (mode === 'doi-thuong') {
+                btnDoiThuong.classList.add('active'); btnHocThuat.classList.remove('active');
+                divDoiThuong.classList.remove('hidden'); divHocThuat.classList.add('hidden');
+            } else {
+                btnHocThuat.classList.add('active'); btnDoiThuong.classList.remove('active');
+                divHocThuat.classList.remove('hidden'); divDoiThuong.classList.add('hidden');
+            }
+        }
+
+        function switchIntro(tab) {
+            const content = document.getElementById('intro-content');
+            const btns = document.querySelectorAll('.intro-tab-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            if(tab === 'hanh-trinh') {
+                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Là một Thầy thuốc Đông y chuyên trị chấn thương thể thao và Lương y Đa khoa, Thầy Minh nhìn nhận y học cổ truyền dưới góc nhìn thực chứng và ứng dụng thực tiễn cao. Không thần thánh hóa, không xa rời cuộc sống, Thầy luôn biến đổi những thang thuốc uyên thâm thành giải pháp gần gũi nhất giúp mọi người tự làm chủ bụng dạ và thân tâm.</p>';
+            } else if(tab === 'triet-ly') {
+                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Triết lý cốt lõi của dự án là cấu trúc hóa dữ liệu phương thang cổ phương sang hệ thống Graph Database, tự động phân tích ma trận Quân-Thần-Tá-Sứ lâm sàng, hỗ trợ đắc lực cho Thầy thuốc tra cứu sâu từ triệu chứng ra bài thuốc chuẩn xác.</p>';
+            } else if(tab === 'am-trail') {
+                content.innerHTML = '<p style="font-size: 1.1rem; color: var(--text-light);">Hệ sinh thái thực chứng ngoài đời thực tọa lạc tại dự án <strong>Am Trail (RegenX Trail Camp)</strong> trên ngọn núi Chứa Chan, Đồng Nai. Nơi ứng dụng thảo dược Đông y phục hồi bản năng vận hóa, gân cốt và cân bằng năng lượng cơ thể.</p>';
+            }
+        }
+
+        function showNodeDesc(name, role, desc) {
+            const panel = document.getElementById('explanation-panel');
+            document.getElementById('panel-title').innerText = name + ' — Vai trò: ' + role;
+            document.getElementById('panel-desc').innerText = desc;
+            panel.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
