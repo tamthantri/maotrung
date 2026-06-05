@@ -53,7 +53,6 @@
         .intro-tab-btn { background: none; border: none; color: var(--text-muted); font-weight: 600; cursor: pointer; padding: 5px 10px; font-size: 0.85rem; letter-spacing: 1px; }
         .intro-tab-btn.active { color: var(--primary-gold); border-bottom: 2px solid var(--primary-gold); }
 
-        /* Khung tìm kiếm nâng cấp */
         .search-section { background: rgba(22, 29, 36, 0.5); padding: 30px; border-radius: 20px; border: 1px solid var(--card-border); margin-bottom: 40px; }
         .search-box-wrapper { display: flex; gap: 15px; margin-bottom: 15px; }
         .search-input {
@@ -68,7 +67,6 @@
         .tag-item { background: rgba(255,255,255,0.05); color: var(--text-muted); padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; border: 1px solid transparent; transition: all 0.3s; }
         .tag-item:hover { border-color: var(--primary-gold); color: var(--primary-gold); }
 
-        /* Toa thuốc động */
         .engine-section {
             background: var(--card-bg); border-radius: 24px; padding: 50px; border: 1px solid var(--card-border);
             box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: none; animation: fadeIn 0.5s ease forwards;
@@ -78,7 +76,6 @@
         .toggle-btn { padding: 10px 24px; border: none; background: none; color: var(--text-muted); cursor: pointer; border-radius: 20px; font-weight: 600; font-size: 0.85rem; }
         .toggle-btn.active { background: var(--primary-gold); color: #0A0D10; box-shadow: 0 4px 15px var(--gold-glow); }
 
-        /* Ma trận kết nối */
         .matrix-pitch {
             background: radial-gradient(circle at 50% 50%, #111A13 0%, #070B08 100%);
             border: 1px solid rgba(122, 147, 66, 0.3); border-radius: 20px; padding: 45px; position: relative; box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
@@ -116,7 +113,6 @@
     </header>
 
     <div class="container">
-        <!-- Bento Intro -->
         <div class="bento-grid">
             <div class="bento-card col-span-2">
                 <div class="intro-tabs">
@@ -134,14 +130,12 @@
             </div>
         </div>
 
-        <!-- Khối Giá Trị -->
         <div class="values-container">
             <div class="value-box"><h3>PHỤC</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Khơi dậy bản năng tự hồi phục cốt lõi của tỳ vị khí và hệ thống gân cốt tổn thương.</p></div>
             <div class="value-box" style="border-top-color: var(--primary-gold);"><h3>TRUYỀN</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Hệ thống hóa khoa học các kinh nghiệm lâm sàng quý báu để truyền thụ trọn vẹn cho học trò.</p></div>
             <div class="value-box" style="border-top-color: #3182ce;"><h3>SỐ</h3><p style="font-size: 0.9rem; color: var(--text-muted);">Số hóa cấu trúc dữ liệu y văn, chuyển ngữ y lý khó hiểu sang ngôn ngữ ứng dụng đời thường.</p></div>
         </div>
 
-        <!-- Trạm Tìm Kiếm Kết Nối Đám Mây -->
         <div class="search-section">
             <div class="search-box-wrapper">
                 <input type="text" id="search-box" class="search-input" placeholder="Gõ tên bài thuốc hoặc triệu chứng (Ví dụ: điều vị tán, bình vị tán, ợ chua, đầy bụng...)" onkeypress="if(event.keyCode==13) searchPrescription()">
@@ -156,7 +150,6 @@
             </div>
         </div>
 
-        <!-- Vùng hiển thị kết quả động -->
         <div class="engine-section" id="prescription-area">
             <div class="engine-header">
                 <div>
@@ -172,7 +165,6 @@
             <div id="mode-doi-thuong"><p id="p-desc-doi-thuong" style="font-size: 1.2rem; margin-bottom: 25px; border-left: 4px solid var(--accent-green); padding-left: 20px; color: #FFFFFF;"></p></div>
             <div id="mode-hoc-thuat" class="hidden"><p id="p-desc-hoc-thuat" style="font-size: 1.2rem; margin-bottom: 25px; border-left: 4px solid var(--primary-gold); padding-left: 20px; font-style: italic; color: #E2E8F0;"></p></div>
 
-            <!-- Ma Trận Kết Nối -->
             <div class="matrix-pitch" style="margin-top: 40px;">
                 <div class="matrix-title">Ma Trận Phối Ngũ Quân Thần Tá Sứ</div>
                 <div id="matrix-nodes-container"></div>
@@ -185,7 +177,6 @@
     </div>
 
     <script>
-        // Kho dữ liệu đám mây giả lập tích hợp sẵn toàn bộ danh mục bài thuốc cốt lõi để Thầy chỉ cần copy-paste là chạy ngay được
         const CloudDatabase = {
             "điều vị tán": {
                 name: "ĐIỀU VỊ TÁN", meta: "Y Văn Gốc: Vương Khẳng Đường (Chủ trị ăn uống không tiêu, ợ chua)",
@@ -194,7 +185,7 @@
                 nodes: [
                     {r: 'quan', n: 'Nhân Sâm (8g)', d: 'Vị Quân: Đại bổ nguyên khí, ích tỳ khí. Cung cấp sức mạnh cốt lõi khôi phục chức năng tiêu hóa nhược.'},
                     {r: 'quan', n: 'Bạch Truật (8g)', d: 'Vị Quân: Kiện tỳ ích khí, táo thấp bồi thổ. Phối hợp Nhân Sâm đánh thẳng vào gốc hư tổn.'},
-                    {r: 'than', n: 'Thương Truật (8g)', d: 'Vị Thần: Táo thấp tỉnh tỳ. Trừ triệt để dịch ẩm nhớp dính tích tụ vùng trung tiêu.'},
+                    {r: 'than', n: 'Thương Truật (8g)', d: 'Vị Thần: Táo thấp tỉnh tỳ. Trừ triệt độ dịch ẩm nhớp dính tích tụ vùng trung tiêu.'},
                     {r: 'than', n: 'Hậu Phác (8g)', d: 'Vị Thần: Hành khí tiêu tích, trừ bĩ mãn. Cắt đứt nhanh triệu chứng căng trướng, đầy hơi.'},
                     {r: 'than', n: 'Phục Linh (8g)', d: 'Vị Thần: Thẩm thấp lợi thủy. Hóa đọng bài trừ dịch thừa qua đường bài tiết.'},
                     {r: 'ta', n: 'Trần Bì (8g)', d: 'Vị Tá: Lý khí hóa đờm, giáng nghịch hòa vị. Trị tận gốc co thắt dạ dày, dứt cơn trào ngược ợ chua.'},
@@ -225,16 +216,30 @@
             }
         };
 
-        // Đồng bộ hóa công cụ tìm kiếm ngược triệu chứng
         const AliasMap = {
-            "ợ chua": "điều vị tán", "đầy bụng": "điều vị tán", "khó tiêu": "điều vị tán",
-            "tiêu chảy": "bình vị tán", "chán ăn": "bình vị tán", "ẩm thấp": "bình vị tán",
-            "yếu bụng": "tứ quân tử thang", "mệt mỏi": "tứ quân tử thang", "kém hấp thu": "tứ quân tử thang"
+            "ợ chua": "điều vị tán", "đầy bụng": "điều vị tán", "khó tiêu": "điều vị tán", "o chua": "điều vị tán", "day bung": "điều vị tán", "kho tieu": "điều vị tán",
+            "tiêu chảy": "bình vị tán", "chán ăn": "bình vị tán", "ẩm thấp": "bình vị tán", "tieu chay": "bình vị tán", "chan an": "bình vị tán", "am thap": "bình vị tán",
+            "yếu bụng": "tứ quân tử thang", "mệt mỏi": "tứ quân tử thang", "kém hấp thu": "tứ quân tử thang", "yeu bung": "tứ quân tử thang", "met moi": "tứ quân tử thang", "kem hap thu": "tứ quân tử thang"
         };
 
         function searchPrescription() {
-            let query = document.getElementById('search-box').value.toLowerCase().trim();
+            let rawInput = document.getElementById('search-box').value;
+            // Thuật toán bóc tách chuẩn hóa tự động: biến đổi toàn bộ chữ viết hoa sang viết thường và dọn khoảng trống thừa
+            let query = rawInput.toLowerCase().trim();
+            
+            // Hỗ trợ tra cứu tìm kiếm tương đối không cần chính xác tuyệt đối
             let key = AliasMap[query] || query;
+            
+            // Xử lý tìm kiếm gần đúng theo ký tự
+            if (!CloudDatabase[key]) {
+                for (let k in CloudDatabase) {
+                    if (k.includes(query) || query.includes(k)) {
+                        key = k;
+                        break;
+                    }
+                }
+            }
+
             let data = CloudDatabase[key];
             let area = document.getElementById('prescription-area');
 
@@ -244,11 +249,9 @@
                 document.getElementById('p-desc-doi-thuong').innerHTML = data.doi_thuong;
                 document.getElementById('p-desc-hoc-thuat').innerHTML = data.hoc_thuat;
 
-                // Xây dựng sơ đồ Quân Thần Tá Sứ động từ kho dữ liệu
                 let container = document.getElementById('matrix-nodes-container');
                 container.innerHTML = '';
                 
-                // Phân nhóm hàng
                 let roles = ['quan', 'than', 'ta', 'su'];
                 roles.forEach(role => {
                     let filtered = data.nodes.filter(n => n.r === role);
@@ -275,7 +278,7 @@
                 area.style.display = 'block';
                 area.scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert("Hệ thống chưa tìm thấy bài thuốc này trên kho đám mây. Thầy hãy thử gõ: điều vị tán, bình vị tán, tứ quân tử thang, hoặc triệu chứng 'ợ chua', 'tiêu chảy' ạ!");
+                alert("Hệ thống chưa tìm thấy bài thuốc này. Thầy hãy thử gõ: điều vị tán, bình vị tán, tứ quân tử thang, hoặc triệu chứng 'ợ chua', 'tiêu chảy' viết hoa hay viết thường đều được ạ!");
             }
         }
 
